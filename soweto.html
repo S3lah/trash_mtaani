@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kahawa Stakeholder and Community Engagement | Trash Mtaani</title>
+  <link rel="icon" type="image/png" href="img/Hunter Green - Rigid _ 24x36.jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F5F5F5;
+      color: #333;
+      margin: 0;
+    }
+    .header {
+      background: #F5F5F5;
+      border-bottom: 1px solid #F5F5F5;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    .section {
+      padding: 10px 1.5rem 60px;
+      max-width: 1000px;
+      margin: auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .logo-img {
+      display: block;
+      max-width: 600px;
+      height: auto;
+      margin: 1rem auto;
+    }
+
+   
+    h2 {
+      color: #7CB342;
+      margin-top: 0.4rem;
+    }
+    /* Full-width carousel styles */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      border-radius: 0;
+      background: #F5F5F5;
+      margin-top: 0rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(124,179,66,0.09);
+      padding-bottom: 1.5rem;
+    }
+    .carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 2rem 2vw 1rem 2vw;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .carousel img {
+      width: 100%;
+      max-width: 470px;
+      height: 460px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: #f9f9f9;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #7CB342;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(124,179,66,0.13);
+      transition: background 0.2s;
+    }
+    .carousel-btn.left {
+      left: 2vw;
+    }
+    .carousel-btn.right {
+      right: 2vw;
+    }
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .description {
+      max-width: 1100px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(124,179,66,0.09);
+      font-size: 1.13rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin: 2rem auto 1rem auto;
+      padding: 0.8rem 2rem;
+      background: #7CB342;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(124,179,66,0.09);
+      transition: background 0.2s;
+    }
+    .back-link:hover {
+      background: #568a1d;
+    }
+    @media (max-width: 900px) {
+      .carousel img {
+        max-width: 350px;
+      }
+      .description {
+        padding: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .carousel-wrapper {
+        padding-bottom: 0.5rem;
+      }
+      .carousel {
+        padding: 1rem 0.5vw 1rem 0.5vw;
+      }
+      .carousel img {
+        max-width: 98vw;
+      }
+      .description {
+        padding: 1rem;
+      }
+      .carousel-btn.left, .carousel-btn.right {
+        left: 0.5vw !important;
+        right: 0.5vw !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html"><img src="img/Trash_Mtaani_Header.png" class="logo-img" alt="Trash Mtaani Logo"></a>
+    <h2>Soweto Community Awareness Engagement</h2>
+  </div>
+  <div class="carousel-wrapper">
+    <button class="carousel-btn left" onclick="scrollGallery('left')">‹</button>
+    <div class="carousel" id="projectGallery">
+      <img src="img/soweto1.jpeg" alt="Clean-up photo 1">
+      <img src="img/soweto2.jpeg" alt="Clean-up photo 2">
+      <img src="img/soweto3.jpeg" alt="Clean-up photo 3">
+      <img src="img/soweto4.jpeg" alt="Clean-up photo 4">
+    </div>
+    <button class="carousel-btn right" onclick="scrollGallery('right')">›</button>
+  </div>
+  <div class="description">
+    In Soweto, Kahawa West, Trash Mtaani's community engagement will be significantly amplified through their collaboration with Kaa Sober, a local Community-Based Organization (CBO). This partnership will mean that Kaa Sober, with its existing community ties and understanding of local dynamics, will play a crucial role in mobilizing residents for waste management initiatives. Their activities will involve facilitating awareness campaigns, organizing community clean-up drives, and establishing or strengthening local waste collection points. Kaa Sober's involvement will also help in fostering a sense of ownership and responsibility among residents, encouraging them to actively participate in waste segregation at source and explore income-generating opportunities through recycling, thereby ensuring the sustainability and success of the waste management efforts in this low-income neighborhood.
+  </div>
+  <a class="back-link" href="home.html#projects"> ← Back to Projects </a>
+  <script>
+    function scrollGallery(direction) {
+      const gallery = document.getElementById('projectGallery');
+      const scrollAmount = window.innerWidth > 900 ? 450 : 350;
+      if (direction === 'left') {
+        gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>

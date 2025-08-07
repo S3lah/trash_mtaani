@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trash Mtaani</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/Hunter Green - Rigid _ 24x36.jpeg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #7CB342;
+      --background-color: #F5F5F5;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.8s ease-in;
+      overflow-x: hidden;
+    }
+
+    h2{
+      color: var(--primary-color);
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    nav {
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #ccc;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      font-weight: bold;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .motto {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .section {
+      padding: 10px 1.5rem 60px;
+      max-width: 1000px;
+      margin: auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .section img.logo-img {
+      display: block;
+      max-width: 600px;
+      height: auto;
+      margin: 1rem auto;
+    }
+
+    .about-section img.logo-img {
+      margin-top: 100px;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+    }
+
+    .how-it-works {
+      text-align: left;
+      width: 100%;
+      max-width: 800px;
+      margin-top: 1rem;
+    }
+
+    .how-it-works div {
+      background: white;
+      padding: 1rem;
+      border-left: 5px solid var(--primary-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
+    }
+
+    .impact-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .impact-card {
+      background: white;
+      padding: 1rem;
+      border-left: 5px solid var(--primary-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* --- TEAM SECTION --- */
+    .team-grid {
+      width: 100%;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .team-row {
+      display: grid;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .top-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bottom-row {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .team-member {
+      text-align: center;
+    }
+
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive tweaks for smaller screens */
+    @media (max-width: 992px) {
+      .top-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .bottom-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-row,
+      .bottom-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dropdown {
+      margin-top: 0.5rem;
+      background: #fff;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      display: none;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .toggle-btn {
+      background: none;
+      color: var(--primary-color);
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    @media(min-width: 768px) {
+      .contact-container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .contact-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .contact-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-box label {
+      font-weight: 600;
+    }
+
+    .contact-box input, .contact-box textarea {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .contact-box button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .contact-info {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #333;
+      padding: 1rem;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    /* Carousel */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto 1rem;
+      border-radius: 8px;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem 0;
+    }
+
+    .carousel img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary-color);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .carousel-btn.left {
+      left: 10px;
+    }
+
+    .carousel-btn.right {
+      right: 10px;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none; /* optional: hide scrollbar */
+    }
+    #partners {
+      padding: 40px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    .partners-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px; /* Space between partner items */
+      flex-wrap: wrap; /* Allows wrapping on small screens */
+      margin-top: 20px;
+    }
+
+    .partner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 150px;
+    }
+
+    .partner p {
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+
+    .partner img {
+      max-width: 100px;
+      height: auto;
+    }
+
+.project-links-list {
+      width: 100%;
+      max-width: 700px;
+      margin: 2.5rem auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .project-long-link {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.5rem 2rem;
+      background: var(--link-bg);
+      color: #333;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      box-shadow: 0 2px 12px rgba(124,179,66,0.07);
+      border: 2px solid var(--primary-color);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .project-long-link:hover {
+      background: var(--link-hover-bg);
+      color: var(--primary-color);
+      box-shadow: 0 4px 18px rgba(124,179,66,0.15);
+      border-color: var(--primary-color);
+    }
+    .project-link-icon {
+      font-size: 2rem;
+      color: inherit;
+      transition: color 0.2s;
+    }
+    .project-long-link:hover .project-link-icon {
+      color: var(--link-hover-color);
+    }
+    @media (max-width: 600px) {
+      .project-long-link { font-size: 1rem; padding: 1rem 1rem; }
+      .project-links-list { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <div>
+        <div class="logo">Trash Mtaani</div>
+        <div class="motto">Transforming Waste into Opportunity in Kenya's Urban Communities</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#team">Meet the Team</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#partners">Partners</a></li>
+       <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="section about-section" id="about">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+      <h2>About the Project</h2>
+      <p>
+        Trash Mtaani is a bold, youth-driven initiative committed to transforming Kenya’s waste crisis into a force for economic and environmental change. Born out of Nairobi’s informal settlements, where unemployment and pollution collide, our project empowers communities to view waste not as a burden but as a resource. Through a pioneering digital points system, residents are rewarded for sorting and delivering waste, earning redeemable credits for essential goods like food and household supplies. This approach not only addresses immediate needs but fosters a culture of sustainability, dignity, and collective responsibility. By creating jobs for youth, supporting local businesses, and promoting environmental stewardship, Trash Mtaani is reimagining the future of urban waste—one community at a time.
+      </p>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+      <h2>How It Works</h2>
+      <div class="how-it-works">
+        <div><strong>1. Sort Waste:</strong> Community members sort household waste into plastics, organics, and metals.</div>
+        <div><strong>2. Drop-Off:</strong> Sorted waste is taken to staffed Trash Mtaani collection hubs.</div>
+        <div><strong>3. Earn Points:</strong> Waste is weighed and participants earn digital points through our system.</div>
+        <div><strong>4. Redeem:</strong> Points can be exchanged for food items like maize flour, rice, or cooking oil.</div>
+        <div><strong>5. Process Waste:</strong> Plastics are sent to recyclers, and organic waste is converted into compost and fertilizer.</div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+      <h2>Our Impact</h2>
+      <div class="impact-cards">
+        <div class="impact-card">🌍 <strong>Environmental Cleanup:</strong> Trash Mtaani has significantly reduced illegal dumping and promoted clean, safe neighborhoods in underserved areas.</div>
+        <div class="impact-card">👷 <strong>Youth Employment:</strong> We create dignified jobs for local youth as waste collectors, sorters, digital system operators, and community educators.</div>
+        <div class="impact-card">👪 <strong>Community Empowerment:</strong> Families gain access to essential products by simply participating in responsible waste disposal.</div>
+        <div class="impact-card">♻️ <strong>Sustainable Waste Use:</strong> Our model ensures that collected waste is properly recycled or transformed into environmentally friendly products.</div>
+      </div>
+    </section>
+
+    <section class="section" id="team">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+      <h2>Meet the Team</h2>
+      <div class="team-grid">
+        <!-- Top row: 3 members -->
+        <div class="team-row top-row">
+          <div class="team-member">
+            <img src="img/eve_photo.JPG" alt="" loading="lazy">
+            <div><strong>Eve Wanjiku</strong></div>
+            <div>Founder & CEO</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">Driven by a commitment to impactful leadership, I bring 10 years of progressive experience, with 7 years successfully building and guiding high-achieving teams. My BSc in Biochemistry from Nairobi University and MBA in Global, Sustainable & Social Enterprise from United States International University provide a robust framework, enabling me to combine analytical insight with a strong drive to deliver sustainable solutions and make meaningful societal contributions</div>
+          </div>
+          <div class="team-member">
+            <img src="img/damaris_photo.png" alt="" loading="lazy">
+            <div><strong>Dawn Damaris</strong></div>
+            <div>Project Manager</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">Project Manager with a background in Project Management and a passion for inclusive development. Experienced in coordinating community-based initiatives, partner engagement, and programme logistics across health, gender, and governance sectors. Driven by values of collaboration, accountability, and purpose-led growth.</div>
+          </div>
+          <div class="team-member">
+            <img src="img/joseph_photo.jpg" alt="" loading="lazy">
+            <div><strong>Joseph Kihonge</strong></div>
+            <div>Head of Operations</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">With a strong foundation in Information Technology and a passion for community empowerment, I bring experience working in various IT roles at the Kenya Revenue Authority (KRA), Sidian bank, Tausi Assurance Agency and Parklands Baptist Church. During my time at this organizations I was actively involved in key areas such as systems administration, cybersecurity, data management, and IT project coordination—equipping me with both technical expertise and strategic thinking.
+Beyond my professional career, I am deeply committed to giving back to society. I believe in using technology not just as a tool for efficiency, but as a bridge to create opportunity and inclusion. This alignment of purpose and skill makes me well-positioned to lead IT strategy for a growing non-profit organization, ensuring that its technology infrastructure is secure, scalable, and impactful for the communities it serves.</div>
+          </div>
+        </div>
+        <!-- Bottom row: 5 members -->
+        <div class="team-row bottom-row">
+          <div class="team-member">
+            <img src="img/dennis_photo.jpeg" alt="" loading="lazy">
+            <div><strong>Dennis Nyaga</strong></div>
+            <div>Chief Finance Officer</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">Dennis is a seasoned financial professional with a BSc in Finance- Investment Management and at the advanced Level CIFA certification. He is also pursuing his MBA in Finance. His career journey has spanned various facets of the financial industry, including a significant tenure in the banking sector.
+
+Key Highlights
+He has a strong background in portfolio management, honed through his experience as a financial research analyst and a negotiator. This expertise has allowed him to excel as an investment banker and dealer, where he has been responsible for managing complex financial transactions. In addition, he serves as a director at KD Gaming, citing his entrepreneurial spirit.</div>
+          </div>
+          <div class="team-member">
+            <img src="img/karen_photo.jpg" alt="" loading="lazy">
+            <div><strong>Karen Ndabari</strong></div>
+            <div>Marketing Head</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">I'm a results-driven Marketing and Graphic Designer with a passion for blending creativity and strategy to build memorable brand experiences. With a background in digital marketing and visual communication, I specialize in crafting compelling content, impactful campaigns, and eye-catching designs that connect with audiences and drive engagement. From social media graphics to full-scale branding projects, I bring both artistic vision and analytical thinking to every project I take on. Whether working solo or collaborating with a team, I’m committed to delivering designs that don’t just look good — they get results.</div>
+          </div>
+          <div class="team-member">
+            <img src="img/collins_photo.jpg" alt="" loading="lazy">
+            <div><strong>Collins Njunia</strong></div>
+            <div>Structural Engineering Head</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">As a Civil and Structural Engineering graduand, I possess strong hands-on experience in construction project monitoring, material quality inspection, and structural design. My background includes preparing as-built drawings and performing structural analyses using industry-standard software. These skills are directly applicable to the development and implementation of infrastructure for sustainable solutions, such as the construction of waste collection stations.I am also proficient in GIS mapping with QGIS, having digitized extensive road networks and prepared technical documentation and visual maps for a national roads board. This expertise enables effective data management and visualization crucial for sustainable resource tracking and urban planning. Furthermore, my experience in digital banking and customer support  highlights my ability to contribute to technology-driven community initiatives aimed at economic empowerment through sustainable development solutions. My complex problem-solving, adaptability, and communication skills further strengthen my capacity to contribute to impactful projects focused on environmental and community upliftment.</div>
+          </div>
+          <div class="team-member">
+            <img src="img/sheila_photo.jpeg" alt="" loading="lazy">
+            <div><strong>Sheila Nkatha</strong></div>
+            <div>Human Resource Manager</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">I am a dedicated Resource Mobilisation Officer with a strong background in program management and community development. I bring a wealth of experience in designing and implementing donor engagement strategies, grant writing, and building strategic partnerships. My expertise lies in aligning fundraising efforts with organizational goals to support impactful and sustainable programs. Passionate about creating positive change, I am committed to empowering communities through innovative and results-driven resource mobilisation.</div>
+          </div>
+          <div class="team-member">
+            <img src="img/precious_photo.jpg" alt="" loading="lazy">
+            <div><strong>Precious Mwangi</strong></div>
+            <div>Chief Technical Officer</div>
+            <button class="toggle-btn" onclick="toggleBio(this)">View Bio</button>
+            <div class="dropdown">As the Chief Technical Officer at Trash Mtaani, I lead the development and integration of technology solutions that drive the project's efficiency, scalability, and impact. My work focuses on streamlining data collection, optimizing internal systems, and leveraging digital tools to enhance community engagement and environmental accountability. With a strong foundation in tech and a passion for sustainable innovation, I ensure that our technical infrastructure aligns with our mission to create cleaner, smarter neighborhoods. I am committed to harnessing the power of technology to transform waste management into a dynamic, data-informed, and community-driven solution.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+      <h2>Our Projects</h2>
+      <div class="project-links-list">
+        <a class="project-long-link" href="kahawa.html">
+          Kahawa Stakeholder and Community Engagement
+        </a>
+        <a class="project-long-link" href="soweto.html">
+          Soweto Community Awareness Engagement
+        </a>
+        <a class="project-long-link" href="kamae.html">
+          Kamae Site Visit
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="partners" style="background-color: #F5F5F5;">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+  <h2>Our Partners</h2>
+  <div class="partners-container">
+    <div class="partner">
+      <p>Furaha Infinity</p>
+      <img src="img/image.png" alt="Partner 1 Logo">
+    </div>
+    <div class="partner">
+      <p>Kahawa West MCA's Office</p>
+      <!--<img src="partner2-logo.png" alt="Partner 2 Logo"> -->
+    </div>
+    <div class="partner">
+      <p>Kamae Flying Women</p>
+     <!-- <img src="partner3-logo.png" alt="Partner 3 Logo"> -->
+    </div>
+    <div class="partner">
+      <p>Sports for Greener</p>
+      <img src="img/Sport for greener Logo.png" alt="Partner 3 Logo">
+    </div>
+    <!-- Add more partners as needed -->
+  </div>
+</section>
+
+    <section class="section" id="contact">
+      <img src="img/Trash_Mtaani_Header.png" alt="Logo" class="logo-img">
+      <h2>Contact Us</h2>
+      
+        <div class="contact-info">
+          <p>📧 Email: <a href="mailto:trashmtaani@gmail.com">trashmtaani@gmail.com</a></p>
+          <p>📞 Phone: +254728012083 ; +254736564200</p>
+          <p>📍 Location: Nairobi, Kenya</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑ Top</button>
+
+  <footer>
+    <p>&copy; 2025 Trash Mtaani Initiative. All rights reserved.</p>
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+
+    function toggleBio(button) {
+      const dropdown = button.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+  </script>
+  <script>
+  function scrollGallery(direction) {
+    const gallery = document.getElementById('projectGallery');
+    const scrollAmount = 400;
+    if (direction === 'left') {
+      gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+      gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }
+</script>
+
+</body>
+</html>
